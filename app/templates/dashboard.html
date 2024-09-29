@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="container-fluid">
+    <!-- Overview Section -->
+    <div class="row mb-4">
+        <!-- Analysis 1 -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h6>Analysis 1</h6>
+                    <h2>25%</h2>
+                    <p>Details about Analysis 1</p>
+                </div>
+            </div>
+        </div>
+        <!-- Analysis 2 -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h6>Analysis 2</h6>
+                    <h2>50%</h2>
+                    <p>Details about Analysis 2</p>
+                </div>
+            </div>
+        </div>
+        <!-- Analysis 3 -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h6>Analysis 3</h6>
+                    <h2>75%</h2>
+                    <p>Details about Analysis 3</p>
+                </div>
+            </div>
+        </div>
+        <!-- Analysis 4 -->
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h6>Analysis 4</h6>
+                    <h2>100%</h2>
+                    <p>Details about Analysis 4</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Charts Section -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Daily Charts</h6>
+                    <canvas id="dailyChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Other Metrics</h6>
+                    <canvas id="otherMetrics"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Analysis Section -->
+    <div class="row mt-4">
+        <!-- Detailed Analysis 1 -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Detailed Analysis 1</h6>
+                    <p>Additional analysis details go here.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Detailed Analysis 2 -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Detailed Analysis 2</h6>
+                    <p>Additional analysis details go here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Example chart for Daily Charts
+    var ctx = document.getElementById('dailyChart').getContext('2d');
+    var dailyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+            datasets: [{
+                label: 'Performance',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        },
+        options: {}
+    });
+
+    // Example chart for Other Metrics
+    var ctx2 = document.getElementById('otherMetrics').getContext('2d');
+    var otherMetrics = new Chart(ctx2, {
+        type: 'radar',
+        data: {
+            labels: ['Metric 1', 'Metric 2', 'Metric 3', 'Metric 4', 'Metric 5'],
+            datasets: [{
+                label: 'Metrics',
+                data: [20, 50, 70, 40, 90],
+                fill: true,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgb(75, 192, 192)',
+            }]
+        },
+        options: {}
+    });
+</script>
+{% endblock %}

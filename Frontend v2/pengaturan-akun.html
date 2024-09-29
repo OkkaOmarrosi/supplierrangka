@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan Akun</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Bar -->
+    <header class="header-bar">
+        <div class="left-header">
+            <button id="hamburger-button" class="hamburger"><i class="fas fa-bars"></i></button>
+            <h1>Pengaturan Akun</h1>
+        </div>
+
+        <!-- Right-side Header: Notification and User Menu -->
+        <div class="right-header">
+            <!-- Notification Menu -->
+            <div class="notification-menu" id="notificationMenu">
+                <i class="fas fa-bell"></i>
+                <span id="notificationBadge" class="notification-badge"></span>
+                <!-- Notification Dropdown -->
+                <div class="notification-dropdown" id="notificationDropdown">
+                    <!-- Notifications will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- User Menu -->
+            <div class="user-menu" id="userMenu">
+                <i class="fas fa-user-circle"></i>
+                <div class="user-dropdown">
+                    <a href="pengaturan-akun.html"> Pengaturan Akun</a>
+                    <a href="login.html"> Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar Navigation Placeholder -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <form id="accountSettingsForm">
+            <input type="text" id="username" placeholder="Nama Pengguna" required>
+            <!-- <input type="email" id="email" placeholder="Email" required> -->
+            <input type="password" id="password" placeholder="Password">
+            <button type="submit" onclick="simpanPengaturanAkun()">Simpan Pengaturan</button>
+        </form>
+    </div>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>

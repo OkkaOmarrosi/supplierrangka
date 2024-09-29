@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Update Stock for {{ product.namaproduk }}</h1>
+<form method="POST">
+    <label for="stok">Stock</label>
+    <input type="number" id="stok" name="stok" value="{{ product.stok }}" required>
+    <button type="submit">Update Stock</button>
+</form>
+{% endblock %}

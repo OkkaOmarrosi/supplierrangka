@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Shipping Management</h2>
+
+    <!-- Shipping Table -->
+    <table class="table table-hover table-bordered align-middle">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Ongkir</th>
+                <th scope="col">Resi</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipping in shippings %}
+            <tr>
+                <th scope="row">{{ shipping.idpengiriman }}</th>
+                <td>{{ shipping.idorder }}</td>
+                <td>{{ shipping.ongkir }}</td>
+                <td>{{ shipping.resi }}</td>
+                <td>
+                    <a href="{{ url_for('shipping.update_shipping', id=shipping.idpengiriman) }}" class="btn btn-sm btn-warning me-2">
+                        <i class="fas fa-edit"></i> Update
+                    </a>
+                    <form action="{{ url_for('shipping.confirm_shipping', id=shipping.idpengiriman) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Are you sure you want to confirm this shipping?')">
+                            <i class="fas fa-check"></i> Confirm
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

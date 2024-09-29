@@ -1,0 +1,76 @@
+/* Sidebar Styling */
+#sidebar-wrapper {
+    background-color: #343a40;
+    min-height: 100vh;
+    margin-left: -250px;
+    transition: margin 0.25s ease-out;
+    width: 250px;
+  }
+  
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: 0;
+  }
+  
+  .sidebar-heading {
+    padding: 10px 15px;
+    font-size: 1.2rem;
+    color: #fff;
+  }
+  
+  .list-group-item {
+    background-color: #343a40;
+    color: #adb5bd;
+    padding: 15px;
+  }
+  
+  .list-group-item-action:hover {
+    background-color: #495057;
+    color: #fff;
+  }
+  
+  .list-group-item i {
+    margin-right: 10px;
+  }
+  
+  /* Header Styling */
+  .navbar {
+    background-color: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar .nav-link {
+    color: #495057;
+    font-weight: 500;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #007bff;
+  }
+  
+  .navbar .btn {
+    padding: 0.5rem 1rem;
+  }
+  
+  .navbar .fas {
+    margin-right: 5px;
+  }
+  
+  /* Content Area */
+  #page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .container-fluid {
+    padding: 30px;
+  }
+  
+  .product-image {
+    max-height: 300px; /* Adjust this value to control the image height */
+    width: auto; /* Allow the width to adjust automatically */
+    object-fit: cover; /* Maintain aspect ratio */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Center the image */
+}

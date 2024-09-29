@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container my-1">
+        <h1 class="mb-4">Create New Product</h1>
+        <form action="{{ url_for('product.create_product') }}" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="namaproduk">Nama Produk:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-box"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="namaproduk" name="namaproduk" placeholder="Masukkan nama produk" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="kategori">Kategori:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-th-list"></i></span>
+                    </div>
+                    <select class="form-control" id="kategori" name="kategori" required>
+                        <option value="frame">Frame</option>
+                        <option value="fork">Fork</option>
+                        <option value="stang">Stang</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="linkgambar">Link Gambar:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    </div>
+                    <input type="text" class="form-control" id="linkgambar" name="linkgambar" placeholder="Masukkan link gambar">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="stok">Stok:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-cubes"></i></span>
+                    </div>
+                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Jumlah stok" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="harga">Harga:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-money-bill-wave"></i></span>
+                    </div>
+                    <input type="number" class="form-control" id="harga" name="harga" step="0.01" placeholder="Harga produk" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
+                    </div>
+                    <textarea class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi produk"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="berat">Berat (kg):</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-weight-hanging"></i></span>
+                    </div>
+                    <input type="number" class="form-control" id="berat" name="berat" step="0.01" placeholder="Berat produk dalam kg">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Simpan Produk</button>
+        </form>
+    </div>
+
+
+    {% endblock %}

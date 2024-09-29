@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Create New Order</h1>
+
+<form method="POST">
+    <label for="retail_id">Retailer ID</label>
+    <input type="text" id="retail_id" name="retail_id" required>
+
+    <h2>Select Products</h2>
+    {% for product in products %}
+    <div>
+        <input type="checkbox" id="product_{{ product.idproduk }}" name="product_ids" value="{{ product.idproduk }}">
+        <label for="product_{{ product.idproduk }}">{{ product.namaproduk }} (Stock: {{ product.stok }})</label>
+        <input type="number" name="quantity_{{ product.idproduk }}" placeholder="Quantity">
+    </div>
+    {% endfor %}
+
+    <button type="submit">Create Order</button>
+</form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Order Details</h1>
+<p>Order ID: {{ order.idtransaksi }}</p>
+<p>Retailer: {{ order.retail.name }}</p>
+<p>Total Price: {{ order.totalharga }}</p>
+<p>Total Weight: {{ order.totalberat }}</p>
+
+<h2>Items in this Order</h2>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Weight</th>
+    </tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.product.namaproduk }}</td>
+        <td>{{ item.jumlah }}</td>
+        <td>{{ item.harga }}</td>
+        <td>{{ item.berat }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Product Detail - {{ product.namaproduk }}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <!-- Image Section -->
+            <img src="{{ product.linkgambar }}" class="card-img-top product-image" alt="Image of {{ product.namaproduk }}">
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="product-detail bg-white p-4 rounded shadow">
+            <!-- Product Title -->
+            <h1 class="product-title">{{ product.namaproduk }}</h1>
+            <!-- Product Information -->
+            <div class="product-info mb-3">
+                <p><strong>Category:</strong> {{ product.kategori }}</p>
+                <p><strong>Stock Available:</strong> {{ product.stok }} pcs</p>
+                <!-- Displaying the product price with local currency formatting -->
+                <p class="product-price h4 text-success font-weight-bold">Rp {{ "{:,.2f}".format(product.harga) }}</p>
+            </div>
+            <hr>
+            <!-- Additional Product Info -->
+            <div class="product-info mb-3">
+                <p><strong>Weight:</strong> {{ product.berat }} kg</p>
+                <p><strong>Description:</strong></p>
+                <p>{{ product.deskripsi }}</p>
+            </div>
+            <!-- Action Buttons -->
+            <div class="d-flex justify-content-between">
+                <a href="{{ url_for('product.update_product', id=product.idproduk) }}" class="btn btn-primary">
+                    <i class="fas fa-edit"></i> Edit Product
+                </a>
+                <a href="{{ url_for('product.list_products') }}" class="btn btn-secondary btn-back">
+                    <i class="fas fa-arrow-left"></i> Back to Products
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

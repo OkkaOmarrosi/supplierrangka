@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Centered Box Container -->
+    <div class="welcome-container">
+        <div class="welcome-box">
+            <h1>Register</h1>
+            <form id="registerForm">
+                <input type="text" id="newUsername" placeholder="Nama Pengguna" required>
+                <!-- <input type="email" id="email" placeholder="Email" required> -->
+                <input type="password" id="newPassword" placeholder="Password" required>
+                <input type="password" id="confirmPassword" placeholder="Konfirmasi Password" required>
+                <button type="submit" class="btn-welcome"><i class="fas fa-user-plus"></i> Daftar</button>
+            </form>
+            <p>Sudah punya akun? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script src="js/scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const registerForm = document.getElementById('registerForm');
+
+            // Add event listener for form submission
+            registerForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                prosesRegister(); // Call the registration function
+            });
+        });
+
+        // Function to handle registration
+        function prosesRegister() {
+            const username = document.getElementById('newUsername').value.trim();
+            // const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            // Validate password match
+            if (password !== confirmPassword) {
+                alert('Password dan Konfirmasi Password tidak cocok.');
+                return;
+            }
+
+            // Check for minimum password length
+            if (password.length < 6) {
+                alert('Password harus terdiri dari minimal 6 karakter.');
+                return;
+            }
+
+            // Successful registration
+            alert('Registrasi berhasil! Silakan login menggunakan akun Anda.');
+            window.location.href = 'login.html'; // Redirect to login page after registration
+        }
+    </script>
+</body>
+</html>
