@@ -70,6 +70,26 @@ class Transaction(db.Model):
 
     def __repr__(self):
         return f'<Transaction {self.idtransaksi}>'
+    
+class Order(db.Model):
+    __tablename__ = 'orders'  # Nama tabel dalam database
+    id = db.Column(db.Integer, primary_key=True)  # ID unik untuk setiap order
+    id_log = db.Column(db.String, nullable=False)  # ID log yang unik
+    kota_asal = db.Column(db.String, nullable=False)  # Kota asal
+    kota_tujuan = db.Column(db.String, nullable=False)  # Kota tujuan
+    berat = db.Column(db.Float, nullable=False)  # Berat total
+    harga_pengiriman = db.Column(db.Float, nullable=False)  # Biaya pengiriman
+    lama_pengiriman = db.Column(db.String, nullable=False),  # Lama pengiriman
+    no_resi = db.Column(db.VARCHAR(255))
+
+    def __init__(self, id_log, kota_asal, kota_tujuan, berat, harga_pengiriman, lama_pengiriman, no_resi):
+        self.id_log = id_log
+        self.kota_asal = kota_asal
+        self.kota_tujuan = kota_tujuan
+        self.berat = berat
+        self.harga_pengiriman = harga_pengiriman
+        self.lama_pengiriman = lama_pengiriman
+        self.no_resi = no_resi
 
 class TransactionItem(db.Model):
     __tablename__ = 'supplier_rangka_transaksi_barang'
