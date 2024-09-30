@@ -1,26 +1,22 @@
 {% extends "base.html" %}
-{% block content %}
-<h1>Order Details</h1>
-<p>Order ID: {{ order.idtransaksi }}</p>
-<p>Retailer: {{ order.retail.name }}</p>
-<p>Total Price: {{ order.totalharga }}</p>
-<p>Total Weight: {{ order.totalberat }}</p>
 
-<h2>Items in this Order</h2>
-<table>
-    <tr>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Weight</th>
-    </tr>
-    {% for item in items %}
-    <tr>
-        <td>{{ item.product.namaproduk }}</td>
-        <td>{{ item.jumlah }}</td>
-        <td>{{ item.harga }}</td>
-        <td>{{ item.berat }}</td>
-    </tr>
-    {% endfor %}
-</table>
+{% block content %}
+<div class="container my-5">
+    <h2 class="mb-4">Order Details</h2>
+
+    <h4>Order ID: {{ order.idtransaksi }}</h4>
+    <p>Nomor Resi: {{ order.resi }}</p>
+    <p>Nama Pembeli: {{ order.namapembeli }}</p>
+    <p>Total Harga: Rp. {{ order.totalharga }}</p>
+
+    <!-- Daftar Item -->
+    <h5>Items:</h5>
+    <ul>
+        {% for item in items %}
+        <li>{{ item.product.namaproduk }} - Quantity: {{ item.jumlah }} - Price: Rp. {{ item.harga }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('order.list_orders') }}" class="btn btn-primary">Back to Order List</a>
+</div>
 {% endblock %}

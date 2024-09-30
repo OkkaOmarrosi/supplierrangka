@@ -1,17 +1,38 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash, jsonify
 from app import db
 from app.models import Product
+from datetime import datetime  # Pastikan datetime diimpor
 
 product_bp = Blueprint('product', __name__)
 
+# Fungsi untuk menghasilkan id produk unik
+def generate_unique_id():
+    latest_product = Product.query.order_by(Product.idproduk.desc()).first()
+    if latest_product:
+        try:
+            last_number = int(latest_product.idproduk.split('-')[0])
+            new_number = last_number + 1
+        except (IndexError, ValueError):
+            new_number = 10  # Jika format id tidak sesuai, mulai dari 10
+    else:
+        new_number = 10  # Mulai dari 10 jika tidak ada produk sebelumnya
+    return f"{new_number}-PRO"
+
 # List all products
-@product_bp.route('/products')
+@product_bp.route('/', methods=['GET'])
 def list_products():
     products = Product.query.all()
+    print(products)  # Untuk cek di terminal apakah data diambil
     return render_template('product/list.html', products=products)
 
+# Detail product (untuk menampilkan detail produk)
+@product_bp.route('/<string:idproduk>', methods=['GET'])
+def product_detail(idproduk):
+    product = Product.query.get_or_404(idproduk)
+    return render_template('product/detail.html', product=product)
+
 # Create new product
-@product_bp.route('/product/new', methods=['GET', 'POST'])
+@product_bp.route('/new', methods=['GET', 'POST'])
 def create_product():
     if request.method == 'POST':
         namaproduk = request.form.get('namaproduk')
@@ -28,6 +49,7 @@ def create_product():
             return redirect(url_for('product.create_product')) 
 
         new_product = Product(
+            idproduk=generate_unique_id(),  # Menghasilkan ID unik
             namaproduk=namaproduk,
             kategori=kategori,
             linkgambar=linkgambar,
@@ -43,10 +65,10 @@ def create_product():
 
     return render_template('product/create.html')
 
-
-@product_bp.route('/product/edit/<int:id>', methods=['GET', 'POST'])
-def update_product(id):
-    product = Product.query.get_or_404(id)
+# Update product
+@product_bp.route('/edit/<string:idproduk>', methods=['GET', 'POST']) 
+def update_product(idproduk):
+    product = Product.query.get_or_404(idproduk)
     
     if request.method == 'POST':
         product.namaproduk = request.form.get('namaproduk')
@@ -60,7 +82,7 @@ def update_product(id):
         # Validasi input
         if not product.namaproduk or not product.kategori or product.stok is None or product.harga is None:
             flash('All fields are required!', 'error')
-            return redirect(url_for('product.update_product', id=id))
+            return redirect(url_for('product.update_product', idproduk=idproduk))
         
         db.session.commit()
         flash('Product updated successfully!', 'success')
@@ -68,17 +90,10 @@ def update_product(id):
     
     return render_template('product/update.html', product=product)
 
-@product_bp.route('/product/<int:idproduk>', methods=['GET'])
-def product_detail(idproduk):
-    # Get the product by ID, or return 404 if not found
-    product = Product.query.get_or_404(idproduk)
-    return render_template('product/detail.html', product=product)
-
-
 # Delete product
-@product_bp.route('/product/delete/<int:id>', methods=['POST'])  # Use POST method for deletion
-def delete_product(id):
-    product = Product.query.get_or_404(id)
+@product_bp.route('/delete/<string:idproduk>', methods=['POST'])  # Ubah tipe ke string
+def delete_product(idproduk):
+    product = Product.query.get_or_404(idproduk)
     db.session.delete(product)
     db.session.commit()
     flash('Product deleted successfully!', 'success')
@@ -88,12 +103,12 @@ def delete_product(id):
 @product_bp.route('/api/products', methods=['GET'])
 def get_products():
     products = Product.query.all()
+    
     return jsonify([{
-        'idproduk': p.idproduk,
-        'namaproduk': p.namaproduk,
-        'kategori': p.kategori,
+        'id_produk': p.idproduk,
+        'nama_produk': p.namaproduk,
         'harga': str(p.harga),
-        'stok': p.stok,
-        'deskripsi': p.deskripsi,
+        'stock': p.stok,
+        'berat': p.berat,
         'linkgambar': p.linkgambar
     } for p in products])

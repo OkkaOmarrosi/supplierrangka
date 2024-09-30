@@ -8,8 +8,8 @@ Product Detail - {{ product.namaproduk }}
 <div class="row">
     <div class="col-md-6">
         <div class="card text-center">
-            <!-- Image Section -->
-            <img src="{{ product.linkgambar }}" class="card-img-top product-image" alt="Image of {{ product.namaproduk }}">
+            <!-- Image Section with fallback -->
+            <img src="{{ product.linkgambar or url_for('static', filename='default-image.png') }}" class="card-img-top product-image" alt="Image of {{ product.namaproduk }}">
         </div>
     </div>
     <div class="col-md-6">
@@ -32,9 +32,14 @@ Product Detail - {{ product.namaproduk }}
             </div>
             <!-- Action Buttons -->
             <div class="d-flex justify-content-between">
-                <a href="{{ url_for('product.update_product', id=product.idproduk) }}" class="btn btn-primary">
+                <a href="{{ url_for('product.update_product', idproduk=product.idproduk) }}" class="btn btn-primary">
                     <i class="fas fa-edit"></i> Edit Product
                 </a>
+                <form action="{{ url_for('product.delete_product', idproduk=product.idproduk) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash-alt"></i> Delete Product
+                    </button>
+                </form>
                 <a href="{{ url_for('product.list_products') }}" class="btn btn-secondary btn-back">
                     <i class="fas fa-arrow-left"></i> Back to Products
                 </a>

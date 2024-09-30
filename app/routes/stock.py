@@ -47,7 +47,7 @@ def delete_stock(id):
     flash('Product deleted successfully!', 'success')
     return redirect(url_for('stock.list_stocks'))
 
-@stock_bp.route('/api/stocks/<int:id>', methods=['GET'])
+@stock_bp.route('x<int:id>', methods=['GET'])
 def get_stock(id):
     product = Product.query.get_or_404(id)
     return jsonify({'idproduk': product.idproduk, 'stok': product.stok}), 200

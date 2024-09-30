@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container my-1">
         <h1 class="mb-4">Update Product</h1>
-        <form action="{{ url_for('product.update_product', id=product.idproduk) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url_for('product.update_product', idproduk=product.idproduk) }}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="namaproduk">Nama Produk:</label>
                 <div class="input-group">
