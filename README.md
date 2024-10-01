@@ -24,6 +24,7 @@ Modul ini merupakan bagian dari Sistem Supply Chain Management (SCM) untuk perus
    **Endpoint**:
    GET /api/products : *Mendapatkan daftar produk dari pemasok*.
    CONTOH:
+```Json
    {
     "berat": "0.50",
     "harga": "450000.00",
@@ -32,6 +33,7 @@ Modul ini merupakan bagian dari Sistem Supply Chain Management (SCM) untuk perus
     "nama_produk": "Speed",
     "stock": 49
   }
+```
 
 2. **Retail membuat pesanan draft**:
 - Retail membuat pesanan draft berdasarkan produk yang dipilih, termasuk informasi produk dan alamat pengiriman.
@@ -40,6 +42,7 @@ Modul ini merupakan bagian dari Sistem Supply Chain Management (SCM) untuk perus
 **Endpoint**:
 POST /api/orders : *Menambah pesanan pembelian produk dari Retail ke Supplier*. 
 CONTOH:
+```Json
 {
    "namapembeli": "verdyan",
    "order_id": 6,
@@ -47,6 +50,7 @@ CONTOH:
    "total_price": "560000.00",
    "total_weight": "4.00"
 }
+```
 
 3. **Supplier mengirim pesanan ke Distributor**:
 - Supplier mengirim detail pesanan ke Distributor, termasuk informasi produk dan alamat pengiriman dari Retail.
@@ -62,6 +66,7 @@ POST /api/distributors/orders : *Mengirim permintaan pengiriman dari Supplier ke
 **Endpoint**:
 POST /api/orders/confirm : *Mengirim konfirmasi harga produk dan ongkos kirim dari Supplier ke Retail*.
 CONTOH:
+```Json
 {
    "namapembeli": 'Verdyan',
    "order_id": 6,
@@ -69,7 +74,7 @@ CONTOH:
    "total_price": "5600000.00",
    "total_weight": "4.00"
 }
-
+```
 5. **Supplier menerima konfirmasi dari Retail**:
 - Setelah Retail mengonfirmasi pesanan, Supplier mengirim informasi tersebut ke Distributor untuk memproses pengiriman.
 
@@ -87,6 +92,7 @@ GET /api/orders/tracking/{order_id} : *Mendapatkan nomor resi dan status pengiri
 - Supplier menyediakan endpoint untuk mendapatkan data pemasok yang aktif.
 
 **Endpoint**:
+```Json
 GET /api/suppliers : *Mendapatkan data pemasok*.
 {
    {
@@ -94,6 +100,7 @@ GET /api/suppliers : *Mendapatkan data pemasok*.
       "name": "SUP002"
    }
 }
+```
 
 8. **Retail mengecek harga pengiriman**:
 - Retail mengirimkan permintaan untuk mengecek harga pengiriman berdasarkan ID log pengiriman.
@@ -131,6 +138,7 @@ POST /api/cek_harga : Memeriksa harga dan estimasi lama pengiriman.
 1. Clone repository ini ke lokal:
    ```bash
    git clone <repository_url>
+   ```
 2. Install dependencies:
 pip install -r requirements.txt
 3. Jalankan server Flask:
