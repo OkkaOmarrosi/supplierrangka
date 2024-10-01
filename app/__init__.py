@@ -41,8 +41,7 @@ def create_app():
     app.register_blueprint(order_bp, url_prefix='/orders')
     app.register_blueprint(shipping_bp, url_prefix='/shippings')
     app.register_blueprint(distributor_bp)  # Pastikan prefix sesuai
-    app.register_blueprint(retailer_bp, url_prefix='/retailers')        # Pastikan prefix sesuai
-    app.register_blueprint(api_bp, url_prefix='/api')                  # Pastikan prefix sesuai
+    app.register_blueprint(api_bp, url_prefix='/api')   # Pastikan prefix sesuai
 
     # Arahkan root URL ke halaman login jika belum login
     @app.route('/')
