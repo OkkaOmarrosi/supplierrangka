@@ -42,17 +42,39 @@ Modul ini merupakan bagian dari Sistem Supply Chain Management (SCM) untuk perus
 **Endpoint**:
 POST /api/orders : *Menambah pesanan pembelian produk dari Retail ke Supplier*. 
 CONTOH:
+
 ```Json
 {
-   "namapembeli": "verdyan",
-   "order_id": 6,
-   "resi": "PKO-3668",
-   "total_price": "560000.00",
-   "total_weight": "4.00"
+    "cart": [
+        {
+            "id_produk": "10-PRO",
+            "quantity": 10
+        },
+        {
+            "id_produk": "7-PRO",
+            "quantity": 10
+        }
+    ],
+    "transaction_id": "123456", 
+    "id_retail" : 2,
+    "id_distributor": "31",
+    "quantity": 3,
+    "total_harga_barang": 1000000,
+    "total_berat_barang": 2.5,
+    "kota_tujuan": "surabaya"
+}
+
+```
+**Respon Yang di dapat**
+```Json
+{
+    "harga_pengiriman": 2100,
+    "id_log": "a3d342fc-7fb5-11ef-a95b-60f81db0ccc2",
+    "lama_pengiriman": "3 hari"
 }
 ```
 
-3. **Supplier mengirim pesanan ke Distributor**:
+1. **Supplier mengirim pesanan ke Distributor**:
 - Supplier mengirim detail pesanan ke Distributor, termasuk informasi produk dan alamat pengiriman dari Retail.
 - Distributor memberikan harga ongkos kirim kepada Supplier.
 
@@ -64,18 +86,24 @@ POST /api/distributors/orders : *Mengirim permintaan pengiriman dari Supplier ke
 - Retail memverifikasi harga produk dan ongkos kirim, kemudian melakukan konfirmasi pesanan.
 
 **Endpoint**:
-POST /api/orders/confirm : *Mengirim konfirmasi harga produk dan ongkos kirim dari Supplier ke Retail*.
+POST /api/supplier/fix_kirim: *menerima konfirmasi retiler dan supplier menerima data id log*.
 CONTOH:
 ```Json
 {
-   "namapembeli": 'Verdyan',
-   "order_id": 6,
-   "resi": "PKO-3668",
-   "total_price": "5600000.00",
-   "total_weight": "4.00"
+   "id_log": "a3d342fc-7fb5-11ef-a95b-60f81db0ccc2"
 }
 ```
-5. **Supplier menerima konfirmasi dari Retail**:
+**Respon**
+```Json
+{
+   "harga_pengiriman": 40000,
+   "id_log": 800,
+   "lama_pengiriman": "10 hari",
+   "no_resi": "JJ2Q2H5UDV",
+   "tanggal_pembelian": "2024-09-28"
+}
+```
+1. **Supplier menerima konfirmasi dari Retail**:
 - Setelah Retail mengonfirmasi pesanan, Supplier mengirim informasi tersebut ke Distributor untuk memproses pengiriman.
 
 **Endpoint**:  
